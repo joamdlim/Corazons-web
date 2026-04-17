@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Cake {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  imageUrl    String
+  flavors     String[]
+  sizes       String[]
+  rating      Float    @default(0)
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  customerName  String
+  email         String?
+  phone         String?
+  pickupDate    DateTime?
+  status        OrderStatus @default(PENDING)
+  totalAmount   Float       @default(0)
+  createdAt     DateTime    @default(now())
+  
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  cakeId        String?
+  cake          Cake?    @relation(fields: [cakeId], references: [id], onDelete: SetNull)
+  
+  cakeName      String
+  cakeType      String?  
+  priceAtTime   Float
+  quantity      Int      @default(1)
+  
+  customMessage String?
+  note          String?
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Settings {
+  id           String @id @default(cuid())
+  businessName String @default("The Cake Shop")
+  address      String @default("")
+  phone        String @default("")
+  email        String @default("")
+  instagram    String @default("")
+  facebook     String @default("")
+  aboutText    String @default("")
+}
