@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, ShoppingBag } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { useCart } from '@/components/CartContext';
 
 interface Cake {
@@ -84,6 +84,7 @@ export default function CakeCard({ cake }: CakeCardProps) {
               className="text-[#2c2c2c] font-bold text-lg"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
+              <span className="text-xs font-normal text-[#888780] mr-1 italic">Starts at</span>
               ₱{startingPrice.toFixed(0)}
             </span>
           </div>
@@ -91,31 +92,10 @@ export default function CakeCard({ cake }: CakeCardProps) {
             <Link
               href={`/cake/${cake.id}`}
               id={`view-cake-${cake.id}`}
-              className="p-2 border border-[#6a8a5b]/40 text-[#6a8a5b] rounded-full hover:bg-[#6a8a5b]/10 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label={`View details for ${cake.name}`}
+              className="px-6 py-2 bg-[#6a8a5b] text-[#ffffff] rounded-full text-sm font-semibold hover:bg-[#58764a] transition-all duration-200 min-h-[44px] flex items-center shadow-md hover:shadow-lg"
             >
-              <ShoppingBag className="w-4 h-4" />
+              Order
             </Link>
-            <button
-              onClick={() => {
-                const f = cake.flavors[0] || 'Original';
-                const s = cake.sizes[0] || 'Standard';
-                const v = cake.variants?.find((v) => v.flavor === f && v.size === s);
-                addToCart({
-                  cakeId: cake.id,
-                  name: cake.name,
-                  flavor: f,
-                  size: s,
-                  price: v ? v.price : cake.price,
-                  quantity: 1,
-                  imageUrl: cake.imageUrl,
-                });
-              }}
-              id={`order-cake-${cake.id}`}
-              className="px-4 py-2 bg-[#6a8a5b] text-[#ffffff] rounded-full text-sm font-semibold hover:bg-[#58764a] transition-all duration-200 min-h-[44px] flex items-center"
-            >
-              Add to Cart
-            </button>
           </div>
         </div>
       </div>
