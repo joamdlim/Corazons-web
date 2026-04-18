@@ -5,6 +5,7 @@ import OrderSection from '@/components/OrderSection';
 import AboutSection from '@/components/AboutSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import { prisma } from '@/lib/prisma';
 
 interface Cake {
   id: string;
@@ -17,14 +18,14 @@ interface Cake {
   rating: number;
 }
 
-async function getCakes(): Promise<Cake[]> {
+async function getCakes() {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/cakes`, {
-      next: { revalidate: 60 },
+    const cakes = await prisma.cake.findMany({
+      where: { isVisible: true },
+      orderBy: { createdAt: 'desc' },
+      take: 8,
     });
-    if (!res.ok) return [];
-    return res.json();
+    return cakes;
   } catch {
     return [];
   }
@@ -32,12 +33,7 @@ async function getCakes(): Promise<Cake[]> {
 
 async function getSettings() {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/admin/settings`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return null;
-    return res.json();
+    return await prisma.settings.findFirst();
   } catch {
     return null;
   }

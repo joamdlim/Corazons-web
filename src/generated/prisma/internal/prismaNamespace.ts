@@ -967,7 +967,14 @@ export const SettingsScalarFieldEnum = {
   email: 'email',
   instagram: 'instagram',
   facebook: 'facebook',
-  aboutText: 'aboutText'
+  aboutText: 'aboutText',
+  heroHeadline: 'heroHeadline',
+  heroSubtext: 'heroSubtext',
+  menuHeadline: 'menuHeadline',
+  menuSubtext: 'menuSubtext',
+  aboutHeadline: 'aboutHeadline',
+  contactHeadline: 'contactHeadline',
+  contactSubtext: 'contactSubtext'
 } as const
 
 export type SettingsScalarFieldEnum = (typeof SettingsScalarFieldEnum)[keyof typeof SettingsScalarFieldEnum]

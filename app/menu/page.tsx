@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import CakeCard from '@/components/CakeCard';
 import Footer from '@/components/Footer';
 import { Cake } from 'lucide-react';
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: 'Full Cake Menu — Corazón Cakes',
@@ -20,12 +21,13 @@ interface CakeData {
   rating: number;
 }
 
-async function getAllCakes(): Promise<CakeData[]> {
+async function getAllCakes() {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/cakes`, { next: { revalidate: 60 } });
-    if (!res.ok) return [];
-    return res.json();
+    const cakes = await prisma.cake.findMany({
+      where: { isVisible: true },
+      orderBy: { createdAt: 'desc' },
+    });
+    return cakes;
   } catch {
     return [];
   }
@@ -33,12 +35,7 @@ async function getAllCakes(): Promise<CakeData[]> {
 
 async function getSettings() {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/admin/settings`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return null;
-    return res.json();
+    return await prisma.settings.findFirst();
   } catch {
     return null;
   }

@@ -33,6 +33,13 @@ export type SettingsMinAggregateOutputType = {
   instagram: string | null
   facebook: string | null
   aboutText: string | null
+  heroHeadline: string | null
+  heroSubtext: string | null
+  menuHeadline: string | null
+  menuSubtext: string | null
+  aboutHeadline: string | null
+  contactHeadline: string | null
+  contactSubtext: string | null
 }
 
 export type SettingsMaxAggregateOutputType = {
@@ -44,6 +51,13 @@ export type SettingsMaxAggregateOutputType = {
   instagram: string | null
   facebook: string | null
   aboutText: string | null
+  heroHeadline: string | null
+  heroSubtext: string | null
+  menuHeadline: string | null
+  menuSubtext: string | null
+  aboutHeadline: string | null
+  contactHeadline: string | null
+  contactSubtext: string | null
 }
 
 export type SettingsCountAggregateOutputType = {
@@ -55,6 +69,13 @@ export type SettingsCountAggregateOutputType = {
   instagram: number
   facebook: number
   aboutText: number
+  heroHeadline: number
+  heroSubtext: number
+  menuHeadline: number
+  menuSubtext: number
+  aboutHeadline: number
+  contactHeadline: number
+  contactSubtext: number
   _all: number
 }
 
@@ -68,6 +89,13 @@ export type SettingsMinAggregateInputType = {
   instagram?: true
   facebook?: true
   aboutText?: true
+  heroHeadline?: true
+  heroSubtext?: true
+  menuHeadline?: true
+  menuSubtext?: true
+  aboutHeadline?: true
+  contactHeadline?: true
+  contactSubtext?: true
 }
 
 export type SettingsMaxAggregateInputType = {
@@ -79,6 +107,13 @@ export type SettingsMaxAggregateInputType = {
   instagram?: true
   facebook?: true
   aboutText?: true
+  heroHeadline?: true
+  heroSubtext?: true
+  menuHeadline?: true
+  menuSubtext?: true
+  aboutHeadline?: true
+  contactHeadline?: true
+  contactSubtext?: true
 }
 
 export type SettingsCountAggregateInputType = {
@@ -90,6 +125,13 @@ export type SettingsCountAggregateInputType = {
   instagram?: true
   facebook?: true
   aboutText?: true
+  heroHeadline?: true
+  heroSubtext?: true
+  menuHeadline?: true
+  menuSubtext?: true
+  aboutHeadline?: true
+  contactHeadline?: true
+  contactSubtext?: true
   _all?: true
 }
 
@@ -174,6 +216,13 @@ export type SettingsGroupByOutputType = {
   instagram: string
   facebook: string
   aboutText: string
+  heroHeadline: string
+  heroSubtext: string
+  menuHeadline: string
+  menuSubtext: string
+  aboutHeadline: string
+  contactHeadline: string
+  contactSubtext: string
   _count: SettingsCountAggregateOutputType | null
   _min: SettingsMinAggregateOutputType | null
   _max: SettingsMaxAggregateOutputType | null
@@ -206,6 +255,13 @@ export type SettingsWhereInput = {
   instagram?: Prisma.StringFilter<"Settings"> | string
   facebook?: Prisma.StringFilter<"Settings"> | string
   aboutText?: Prisma.StringFilter<"Settings"> | string
+  heroHeadline?: Prisma.StringFilter<"Settings"> | string
+  heroSubtext?: Prisma.StringFilter<"Settings"> | string
+  menuHeadline?: Prisma.StringFilter<"Settings"> | string
+  menuSubtext?: Prisma.StringFilter<"Settings"> | string
+  aboutHeadline?: Prisma.StringFilter<"Settings"> | string
+  contactHeadline?: Prisma.StringFilter<"Settings"> | string
+  contactSubtext?: Prisma.StringFilter<"Settings"> | string
 }
 
 export type SettingsOrderByWithRelationInput = {
@@ -217,6 +273,13 @@ export type SettingsOrderByWithRelationInput = {
   instagram?: Prisma.SortOrder
   facebook?: Prisma.SortOrder
   aboutText?: Prisma.SortOrder
+  heroHeadline?: Prisma.SortOrder
+  heroSubtext?: Prisma.SortOrder
+  menuHeadline?: Prisma.SortOrder
+  menuSubtext?: Prisma.SortOrder
+  aboutHeadline?: Prisma.SortOrder
+  contactHeadline?: Prisma.SortOrder
+  contactSubtext?: Prisma.SortOrder
 }
 
 export type SettingsWhereUniqueInput = Prisma.AtLeast<{
@@ -231,6 +294,13 @@ export type SettingsWhereUniqueInput = Prisma.AtLeast<{
   instagram?: Prisma.StringFilter<"Settings"> | string
   facebook?: Prisma.StringFilter<"Settings"> | string
   aboutText?: Prisma.StringFilter<"Settings"> | string
+  heroHeadline?: Prisma.StringFilter<"Settings"> | string
+  heroSubtext?: Prisma.StringFilter<"Settings"> | string
+  menuHeadline?: Prisma.StringFilter<"Settings"> | string
+  menuSubtext?: Prisma.StringFilter<"Settings"> | string
+  aboutHeadline?: Prisma.StringFilter<"Settings"> | string
+  contactHeadline?: Prisma.StringFilter<"Settings"> | string
+  contactSubtext?: Prisma.StringFilter<"Settings"> | string
 }, "id">
 
 export type SettingsOrderByWithAggregationInput = {
@@ -242,6 +312,13 @@ export type SettingsOrderByWithAggregationInput = {
   instagram?: Prisma.SortOrder
   facebook?: Prisma.SortOrder
   aboutText?: Prisma.SortOrder
+  heroHeadline?: Prisma.SortOrder
+  heroSubtext?: Prisma.SortOrder
+  menuHeadline?: Prisma.SortOrder
+  menuSubtext?: Prisma.SortOrder
+  aboutHeadline?: Prisma.SortOrder
+  contactHeadline?: Prisma.SortOrder
+  contactSubtext?: Prisma.SortOrder
   _count?: Prisma.SettingsCountOrderByAggregateInput
   _max?: Prisma.SettingsMaxOrderByAggregateInput
   _min?: Prisma.SettingsMinOrderByAggregateInput
@@ -259,6 +336,13 @@ export type SettingsScalarWhereWithAggregatesInput = {
   instagram?: Prisma.StringWithAggregatesFilter<"Settings"> | string
   facebook?: Prisma.StringWithAggregatesFilter<"Settings"> | string
   aboutText?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  heroHeadline?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  heroSubtext?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  menuHeadline?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  menuSubtext?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  aboutHeadline?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  contactHeadline?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  contactSubtext?: Prisma.StringWithAggregatesFilter<"Settings"> | string
 }
 
 export type SettingsCreateInput = {
@@ -270,6 +354,13 @@ export type SettingsCreateInput = {
   instagram?: string
   facebook?: string
   aboutText?: string
+  heroHeadline?: string
+  heroSubtext?: string
+  menuHeadline?: string
+  menuSubtext?: string
+  aboutHeadline?: string
+  contactHeadline?: string
+  contactSubtext?: string
 }
 
 export type SettingsUncheckedCreateInput = {
@@ -281,6 +372,13 @@ export type SettingsUncheckedCreateInput = {
   instagram?: string
   facebook?: string
   aboutText?: string
+  heroHeadline?: string
+  heroSubtext?: string
+  menuHeadline?: string
+  menuSubtext?: string
+  aboutHeadline?: string
+  contactHeadline?: string
+  contactSubtext?: string
 }
 
 export type SettingsUpdateInput = {
@@ -292,6 +390,13 @@ export type SettingsUpdateInput = {
   instagram?: Prisma.StringFieldUpdateOperationsInput | string
   facebook?: Prisma.StringFieldUpdateOperationsInput | string
   aboutText?: Prisma.StringFieldUpdateOperationsInput | string
+  heroHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  heroSubtext?: Prisma.StringFieldUpdateOperationsInput | string
+  menuHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  menuSubtext?: Prisma.StringFieldUpdateOperationsInput | string
+  aboutHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  contactHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  contactSubtext?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SettingsUncheckedUpdateInput = {
@@ -303,6 +408,13 @@ export type SettingsUncheckedUpdateInput = {
   instagram?: Prisma.StringFieldUpdateOperationsInput | string
   facebook?: Prisma.StringFieldUpdateOperationsInput | string
   aboutText?: Prisma.StringFieldUpdateOperationsInput | string
+  heroHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  heroSubtext?: Prisma.StringFieldUpdateOperationsInput | string
+  menuHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  menuSubtext?: Prisma.StringFieldUpdateOperationsInput | string
+  aboutHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  contactHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  contactSubtext?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SettingsCreateManyInput = {
@@ -314,6 +426,13 @@ export type SettingsCreateManyInput = {
   instagram?: string
   facebook?: string
   aboutText?: string
+  heroHeadline?: string
+  heroSubtext?: string
+  menuHeadline?: string
+  menuSubtext?: string
+  aboutHeadline?: string
+  contactHeadline?: string
+  contactSubtext?: string
 }
 
 export type SettingsUpdateManyMutationInput = {
@@ -325,6 +444,13 @@ export type SettingsUpdateManyMutationInput = {
   instagram?: Prisma.StringFieldUpdateOperationsInput | string
   facebook?: Prisma.StringFieldUpdateOperationsInput | string
   aboutText?: Prisma.StringFieldUpdateOperationsInput | string
+  heroHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  heroSubtext?: Prisma.StringFieldUpdateOperationsInput | string
+  menuHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  menuSubtext?: Prisma.StringFieldUpdateOperationsInput | string
+  aboutHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  contactHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  contactSubtext?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SettingsUncheckedUpdateManyInput = {
@@ -336,6 +462,13 @@ export type SettingsUncheckedUpdateManyInput = {
   instagram?: Prisma.StringFieldUpdateOperationsInput | string
   facebook?: Prisma.StringFieldUpdateOperationsInput | string
   aboutText?: Prisma.StringFieldUpdateOperationsInput | string
+  heroHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  heroSubtext?: Prisma.StringFieldUpdateOperationsInput | string
+  menuHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  menuSubtext?: Prisma.StringFieldUpdateOperationsInput | string
+  aboutHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  contactHeadline?: Prisma.StringFieldUpdateOperationsInput | string
+  contactSubtext?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SettingsCountOrderByAggregateInput = {
@@ -347,6 +480,13 @@ export type SettingsCountOrderByAggregateInput = {
   instagram?: Prisma.SortOrder
   facebook?: Prisma.SortOrder
   aboutText?: Prisma.SortOrder
+  heroHeadline?: Prisma.SortOrder
+  heroSubtext?: Prisma.SortOrder
+  menuHeadline?: Prisma.SortOrder
+  menuSubtext?: Prisma.SortOrder
+  aboutHeadline?: Prisma.SortOrder
+  contactHeadline?: Prisma.SortOrder
+  contactSubtext?: Prisma.SortOrder
 }
 
 export type SettingsMaxOrderByAggregateInput = {
@@ -358,6 +498,13 @@ export type SettingsMaxOrderByAggregateInput = {
   instagram?: Prisma.SortOrder
   facebook?: Prisma.SortOrder
   aboutText?: Prisma.SortOrder
+  heroHeadline?: Prisma.SortOrder
+  heroSubtext?: Prisma.SortOrder
+  menuHeadline?: Prisma.SortOrder
+  menuSubtext?: Prisma.SortOrder
+  aboutHeadline?: Prisma.SortOrder
+  contactHeadline?: Prisma.SortOrder
+  contactSubtext?: Prisma.SortOrder
 }
 
 export type SettingsMinOrderByAggregateInput = {
@@ -369,6 +516,13 @@ export type SettingsMinOrderByAggregateInput = {
   instagram?: Prisma.SortOrder
   facebook?: Prisma.SortOrder
   aboutText?: Prisma.SortOrder
+  heroHeadline?: Prisma.SortOrder
+  heroSubtext?: Prisma.SortOrder
+  menuHeadline?: Prisma.SortOrder
+  menuSubtext?: Prisma.SortOrder
+  aboutHeadline?: Prisma.SortOrder
+  contactHeadline?: Prisma.SortOrder
+  contactSubtext?: Prisma.SortOrder
 }
 
 
@@ -382,6 +536,13 @@ export type SettingsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   instagram?: boolean
   facebook?: boolean
   aboutText?: boolean
+  heroHeadline?: boolean
+  heroSubtext?: boolean
+  menuHeadline?: boolean
+  menuSubtext?: boolean
+  aboutHeadline?: boolean
+  contactHeadline?: boolean
+  contactSubtext?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -393,6 +554,13 @@ export type SettingsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   instagram?: boolean
   facebook?: boolean
   aboutText?: boolean
+  heroHeadline?: boolean
+  heroSubtext?: boolean
+  menuHeadline?: boolean
+  menuSubtext?: boolean
+  aboutHeadline?: boolean
+  contactHeadline?: boolean
+  contactSubtext?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -404,6 +572,13 @@ export type SettingsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   instagram?: boolean
   facebook?: boolean
   aboutText?: boolean
+  heroHeadline?: boolean
+  heroSubtext?: boolean
+  menuHeadline?: boolean
+  menuSubtext?: boolean
+  aboutHeadline?: boolean
+  contactHeadline?: boolean
+  contactSubtext?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectScalar = {
@@ -415,9 +590,16 @@ export type SettingsSelectScalar = {
   instagram?: boolean
   facebook?: boolean
   aboutText?: boolean
+  heroHeadline?: boolean
+  heroSubtext?: boolean
+  menuHeadline?: boolean
+  menuSubtext?: boolean
+  aboutHeadline?: boolean
+  contactHeadline?: boolean
+  contactSubtext?: boolean
 }
 
-export type SettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "businessName" | "address" | "phone" | "email" | "instagram" | "facebook" | "aboutText", ExtArgs["result"]["settings"]>
+export type SettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "businessName" | "address" | "phone" | "email" | "instagram" | "facebook" | "aboutText" | "heroHeadline" | "heroSubtext" | "menuHeadline" | "menuSubtext" | "aboutHeadline" | "contactHeadline" | "contactSubtext", ExtArgs["result"]["settings"]>
 
 export type $SettingsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Settings"
@@ -431,6 +613,13 @@ export type $SettingsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     instagram: string
     facebook: string
     aboutText: string
+    heroHeadline: string
+    heroSubtext: string
+    menuHeadline: string
+    menuSubtext: string
+    aboutHeadline: string
+    contactHeadline: string
+    contactSubtext: string
   }, ExtArgs["result"]["settings"]>
   composites: {}
 }
@@ -862,6 +1051,13 @@ export interface SettingsFieldRefs {
   readonly instagram: Prisma.FieldRef<"Settings", 'String'>
   readonly facebook: Prisma.FieldRef<"Settings", 'String'>
   readonly aboutText: Prisma.FieldRef<"Settings", 'String'>
+  readonly heroHeadline: Prisma.FieldRef<"Settings", 'String'>
+  readonly heroSubtext: Prisma.FieldRef<"Settings", 'String'>
+  readonly menuHeadline: Prisma.FieldRef<"Settings", 'String'>
+  readonly menuSubtext: Prisma.FieldRef<"Settings", 'String'>
+  readonly aboutHeadline: Prisma.FieldRef<"Settings", 'String'>
+  readonly contactHeadline: Prisma.FieldRef<"Settings", 'String'>
+  readonly contactSubtext: Prisma.FieldRef<"Settings", 'String'>
 }
     
 
