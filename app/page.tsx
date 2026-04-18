@@ -15,6 +15,7 @@ interface Cake {
   imageUrl: string;
   flavors: string[];
   sizes: string[];
+  variants?: { flavor: string; size: string; price: number }[];
   rating: number;
 }
 
@@ -25,7 +26,7 @@ async function getCakes() {
       orderBy: { createdAt: 'desc' },
       take: 8,
     });
-    return cakes;
+    return cakes as unknown as Cake[];
   } catch {
     return [];
   }

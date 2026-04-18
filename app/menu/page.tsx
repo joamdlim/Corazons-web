@@ -18,6 +18,7 @@ interface CakeData {
   imageUrl: string;
   flavors: string[];
   sizes: string[];
+  variants?: { flavor: string; size: string; price: number }[];
   rating: number;
 }
 
@@ -27,7 +28,7 @@ async function getAllCakes() {
       where: { isVisible: true },
       orderBy: { createdAt: 'desc' },
     });
-    return cakes;
+    return cakes as unknown as CakeData[];
   } catch {
     return [];
   }

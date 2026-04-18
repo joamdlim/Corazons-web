@@ -15,6 +15,7 @@ interface Cake {
   flavors: string[];
   sizes: string[];
   rating: number;
+  variants?: { flavor: string; size: string; price: number }[];
   isVisible: boolean;
 }
 
@@ -170,6 +171,7 @@ export default function CakesGrid({ cakes, onRefresh }: CakesGridProps) {
             flavors: editingCake.flavors.join(', '),
             sizes: editingCake.sizes.join(', '),
             rating: String(editingCake.rating),
+            variants: editingCake.variants,
           } : undefined}
           onClose={() => { setShowModal(false); setEditingCake(null); }}
           onSaved={onRefresh}

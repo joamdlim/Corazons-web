@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import ProductDetail from '@/components/ProductDetail';
 import Footer from '@/components/Footer';
+import { prisma } from '@/lib/prisma';
 
 interface Cake {
   id: string;
@@ -12,15 +13,17 @@ interface Cake {
   imageUrl: string;
   flavors: string[];
   sizes: string[];
+  variants?: { flavor: string; size: string; price: number }[];
   rating: number;
 }
 
 async function getCake(id: string): Promise<Cake | null> {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/cakes/${id}`, { next: { revalidate: 60 } });
-    if (!res.ok) return null;
-    return res.json();
+    const cake = await prisma.cake.findFirst({
+      where: { id, isVisible: true },
+    });
+    if (!cake) return null;
+    return cake as unknown as Cake;
   } catch {
     return null;
   }

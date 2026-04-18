@@ -66,6 +66,7 @@ export type CakeCountAggregateOutputType = {
   imageUrl: number
   flavors: number
   sizes: number
+  variants: number
   rating: number
   isVisible: number
   createdAt: number
@@ -113,6 +114,7 @@ export type CakeCountAggregateInputType = {
   imageUrl?: true
   flavors?: true
   sizes?: true
+  variants?: true
   rating?: true
   isVisible?: true
   createdAt?: true
@@ -213,6 +215,7 @@ export type CakeGroupByOutputType = {
   imageUrl: string
   flavors: string[]
   sizes: string[]
+  variants: runtime.JsonValue
   rating: number
   isVisible: boolean
   createdAt: Date
@@ -249,6 +252,7 @@ export type CakeWhereInput = {
   imageUrl?: Prisma.StringFilter<"Cake"> | string
   flavors?: Prisma.StringNullableListFilter<"Cake">
   sizes?: Prisma.StringNullableListFilter<"Cake">
+  variants?: Prisma.JsonFilter<"Cake">
   rating?: Prisma.FloatFilter<"Cake"> | number
   isVisible?: Prisma.BoolFilter<"Cake"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Cake"> | Date | string
@@ -263,6 +267,7 @@ export type CakeOrderByWithRelationInput = {
   imageUrl?: Prisma.SortOrder
   flavors?: Prisma.SortOrder
   sizes?: Prisma.SortOrder
+  variants?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   isVisible?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -280,6 +285,7 @@ export type CakeWhereUniqueInput = Prisma.AtLeast<{
   imageUrl?: Prisma.StringFilter<"Cake"> | string
   flavors?: Prisma.StringNullableListFilter<"Cake">
   sizes?: Prisma.StringNullableListFilter<"Cake">
+  variants?: Prisma.JsonFilter<"Cake">
   rating?: Prisma.FloatFilter<"Cake"> | number
   isVisible?: Prisma.BoolFilter<"Cake"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Cake"> | Date | string
@@ -294,6 +300,7 @@ export type CakeOrderByWithAggregationInput = {
   imageUrl?: Prisma.SortOrder
   flavors?: Prisma.SortOrder
   sizes?: Prisma.SortOrder
+  variants?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   isVisible?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -315,6 +322,7 @@ export type CakeScalarWhereWithAggregatesInput = {
   imageUrl?: Prisma.StringWithAggregatesFilter<"Cake"> | string
   flavors?: Prisma.StringNullableListFilter<"Cake">
   sizes?: Prisma.StringNullableListFilter<"Cake">
+  variants?: Prisma.JsonWithAggregatesFilter<"Cake">
   rating?: Prisma.FloatWithAggregatesFilter<"Cake"> | number
   isVisible?: Prisma.BoolWithAggregatesFilter<"Cake"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Cake"> | Date | string
@@ -328,6 +336,7 @@ export type CakeCreateInput = {
   imageUrl: string
   flavors?: Prisma.CakeCreateflavorsInput | string[]
   sizes?: Prisma.CakeCreatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   isVisible?: boolean
   createdAt?: Date | string
@@ -342,6 +351,7 @@ export type CakeUncheckedCreateInput = {
   imageUrl: string
   flavors?: Prisma.CakeCreateflavorsInput | string[]
   sizes?: Prisma.CakeCreatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   isVisible?: boolean
   createdAt?: Date | string
@@ -356,6 +366,7 @@ export type CakeUpdateInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   flavors?: Prisma.CakeUpdateflavorsInput | string[]
   sizes?: Prisma.CakeUpdatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -370,6 +381,7 @@ export type CakeUncheckedUpdateInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   flavors?: Prisma.CakeUpdateflavorsInput | string[]
   sizes?: Prisma.CakeUpdatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -384,6 +396,7 @@ export type CakeCreateManyInput = {
   imageUrl: string
   flavors?: Prisma.CakeCreateflavorsInput | string[]
   sizes?: Prisma.CakeCreatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   isVisible?: boolean
   createdAt?: Date | string
@@ -397,6 +410,7 @@ export type CakeUpdateManyMutationInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   flavors?: Prisma.CakeUpdateflavorsInput | string[]
   sizes?: Prisma.CakeUpdatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -410,6 +424,7 @@ export type CakeUncheckedUpdateManyInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   flavors?: Prisma.CakeUpdateflavorsInput | string[]
   sizes?: Prisma.CakeUpdatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -431,6 +446,7 @@ export type CakeCountOrderByAggregateInput = {
   imageUrl?: Prisma.SortOrder
   flavors?: Prisma.SortOrder
   sizes?: Prisma.SortOrder
+  variants?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   isVisible?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -535,6 +551,7 @@ export type CakeCreateWithoutOrderItemsInput = {
   imageUrl: string
   flavors?: Prisma.CakeCreateflavorsInput | string[]
   sizes?: Prisma.CakeCreatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   isVisible?: boolean
   createdAt?: Date | string
@@ -548,6 +565,7 @@ export type CakeUncheckedCreateWithoutOrderItemsInput = {
   imageUrl: string
   flavors?: Prisma.CakeCreateflavorsInput | string[]
   sizes?: Prisma.CakeCreatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   isVisible?: boolean
   createdAt?: Date | string
@@ -577,6 +595,7 @@ export type CakeUpdateWithoutOrderItemsInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   flavors?: Prisma.CakeUpdateflavorsInput | string[]
   sizes?: Prisma.CakeUpdatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -590,6 +609,7 @@ export type CakeUncheckedUpdateWithoutOrderItemsInput = {
   imageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   flavors?: Prisma.CakeUpdateflavorsInput | string[]
   sizes?: Prisma.CakeUpdatesizesInput | string[]
+  variants?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
   isVisible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -634,6 +654,7 @@ export type CakeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   imageUrl?: boolean
   flavors?: boolean
   sizes?: boolean
+  variants?: boolean
   rating?: boolean
   isVisible?: boolean
   createdAt?: boolean
@@ -649,6 +670,7 @@ export type CakeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   imageUrl?: boolean
   flavors?: boolean
   sizes?: boolean
+  variants?: boolean
   rating?: boolean
   isVisible?: boolean
   createdAt?: boolean
@@ -662,6 +684,7 @@ export type CakeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   imageUrl?: boolean
   flavors?: boolean
   sizes?: boolean
+  variants?: boolean
   rating?: boolean
   isVisible?: boolean
   createdAt?: boolean
@@ -675,12 +698,13 @@ export type CakeSelectScalar = {
   imageUrl?: boolean
   flavors?: boolean
   sizes?: boolean
+  variants?: boolean
   rating?: boolean
   isVisible?: boolean
   createdAt?: boolean
 }
 
-export type CakeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "imageUrl" | "flavors" | "sizes" | "rating" | "isVisible" | "createdAt", ExtArgs["result"]["cake"]>
+export type CakeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "imageUrl" | "flavors" | "sizes" | "variants" | "rating" | "isVisible" | "createdAt", ExtArgs["result"]["cake"]>
 export type CakeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItems?: boolean | Prisma.Cake$orderItemsArgs<ExtArgs>
   _count?: boolean | Prisma.CakeCountOutputTypeDefaultArgs<ExtArgs>
@@ -701,6 +725,7 @@ export type $CakePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     imageUrl: string
     flavors: string[]
     sizes: string[]
+    variants: runtime.JsonValue
     rating: number
     isVisible: boolean
     createdAt: Date
@@ -1135,6 +1160,7 @@ export interface CakeFieldRefs {
   readonly imageUrl: Prisma.FieldRef<"Cake", 'String'>
   readonly flavors: Prisma.FieldRef<"Cake", 'String[]'>
   readonly sizes: Prisma.FieldRef<"Cake", 'String[]'>
+  readonly variants: Prisma.FieldRef<"Cake", 'Json'>
   readonly rating: Prisma.FieldRef<"Cake", 'Float'>
   readonly isVisible: Prisma.FieldRef<"Cake", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Cake", 'DateTime'>

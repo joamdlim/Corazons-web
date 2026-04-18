@@ -13,6 +13,7 @@ interface Cake {
   flavors: string[];
   sizes: string[];
   rating: number;
+  variants?: { flavor: string; size: string; price: number }[];
   isVisible: boolean;
 }
 
