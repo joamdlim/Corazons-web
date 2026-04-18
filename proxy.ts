@@ -1,38 +1,30 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { getToken } from 'next-auth/jwt';
+import { auth } from '@/lib/auth';
 
-export async function proxy(request: NextRequest) {
+// NextAuth v5: wrap proxy with auth() so request.auth is populated
+// The old getToken() approach fails on HTTPS because the v5 cookie name changed
+export const proxy = auth((request) => {
   const { pathname } = request.nextUrl;
+  const isAuthenticated = !!request.auth;
 
   // Protect all /admin routes except /admin/login
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
-    const token = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET,
-    });
-
-    if (!token) {
+    if (!isAuthenticated) {
       const loginUrl = new URL('/admin/login', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
     }
   }
 
-  // Also protect admin API routes
+  // Protect admin API routes
   if (pathname.startsWith('/api/admin')) {
-    const token = await getToken({
-      req: request,
-      secret: process.env.NEXTAUTH_SECRET,
-    });
-
-    if (!token) {
+    if (!isAuthenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
   matcher: ['/admin/:path*', '/api/admin/:path*'],
