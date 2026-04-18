@@ -60,6 +60,8 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
     return map;
   });
   
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(initialData?.imageUrl || null);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -68,12 +70,31 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.description || !form.price || !form.imageUrl) {
-      toast.error('Please fill in all required fields');
+    if (!form.name || !form.description || !form.price || (!form.imageUrl && !imageFile)) {
+      toast.error('Please fill in all required fields and upload an image');
       return;
     }
     setLoading(true);
     try {
+      let finalImageUrl = form.imageUrl;
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append('file', imageFile);
+        const uploadRes = await fetch('/api/admin/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        if (!uploadRes.ok) throw new Error('Upload failed');
+        const uploadData = await uploadRes.json();
+        finalImageUrl = uploadData.url;
+      }
+
+      if (!finalImageUrl) {
+        toast.error('Please provide an image');
+        setLoading(false);
+        return;
+      }
+
       const url = mode === 'edit' && initialData?.id
         ? `/api/admin/cakes/${initialData.id}`
         : '/api/admin/cakes';
@@ -100,6 +121,7 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
 
       const payload = {
         ...form,
+        imageUrl: finalImageUrl,
         variants: activeVariants,
       };
 
@@ -204,17 +226,28 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
 
           <div>
             <label className="block text-white/60 text-sm mb-1.5">
-              Image URL <span className="text-[#6a8a5b]">*</span>
+              Cake Image <span className="text-[#6a8a5b]">*</span>
             </label>
-            <input
-              name="imageUrl"
-              value={form.imageUrl}
-              onChange={handleChange}
-              required
-              id="cake-modal-image"
-              placeholder="https://images.unsplash.com/..."
-              className="w-full px-3 py-2.5 bg-white/5 border border-white/15 rounded-xl text-white text-sm placeholder-white/30 focus:outline-none focus:border-[#6a8a5b]/60 min-h-[44px]"
-            />
+            <div className="flex items-center gap-4">
+              {imagePreview && (
+                <div className="w-16 h-16 rounded-xl overflow-hidden bg-white/5 shrink-0 border border-white/15">
+                  <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setImageFile(file);
+                    setImagePreview(URL.createObjectURL(file));
+                  }
+                }}
+                className="w-full px-3 py-2.5 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#6a8a5b] file:text-white hover:file:bg-[#58764a] transition-all cursor-pointer"
+              />
+            </div>
+            <p className="text-white/30 text-xs mt-1.5">Upload an image of the cake.</p>
           </div>
 
           <div>
