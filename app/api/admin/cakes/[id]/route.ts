@@ -9,7 +9,7 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await req.json();
-    const { name, description, price, imageUrl, flavors, sizes, rating, isVisible } = body;
+    const { name, description, price, imageUrl, flavors, sizes, rating, isVisible, variants } = body;
 
     const updateData: {
       name?: string;
@@ -20,6 +20,7 @@ export async function PATCH(
       sizes?: string[];
       rating?: number;
       isVisible?: boolean;
+      variants?: any;
     } = {};
 
     if (name !== undefined) updateData.name = name;
@@ -38,6 +39,7 @@ export async function PATCH(
         : sizes.split(',').map((s: string) => s.trim()).filter(Boolean);
     }
     if (rating !== undefined) updateData.rating = parseFloat(rating);
+    if (variants !== undefined) updateData.variants = variants;
 
     const cake = await prisma.cake.update({ where: { id }, data: updateData });
     revalidatePath('/');

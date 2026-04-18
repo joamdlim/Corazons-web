@@ -14,6 +14,7 @@ interface Cake {
   flavors: string[];
   sizes: string[];
   rating: number;
+  variants?: { flavor: string; size: string; price: number }[];
 }
 
 interface CakeCardProps {
@@ -22,6 +23,10 @@ interface CakeCardProps {
 
 export default function CakeCard({ cake }: CakeCardProps) {
   const { addToCart } = useCart();
+  const startingPrice = cake.variants && cake.variants.length > 0
+    ? Math.min(...cake.variants.map((v) => v.price))
+    : cake.price;
+
   return (
     <div
       className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col"
@@ -40,7 +45,7 @@ export default function CakeCard({ cake }: CakeCardProps) {
 
         {/* Price pill on hover */}
         <div className="absolute top-3 right-3 bg-[#6a8a5b] text-[#ffffff] px-3 py-1 rounded-full text-sm font-bold shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-          ₱{cake.price.toFixed(0)}
+          From ₱{startingPrice.toFixed(0)}
         </div>
       </div>
 
@@ -79,7 +84,7 @@ export default function CakeCard({ cake }: CakeCardProps) {
               className="text-[#2c2c2c] font-bold text-lg"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              ₱{cake.price.toFixed(0)}
+              ₱{startingPrice.toFixed(0)}
             </span>
           </div>
           <div className="flex gap-2">
@@ -93,12 +98,15 @@ export default function CakeCard({ cake }: CakeCardProps) {
             </Link>
             <button
               onClick={() => {
+                const f = cake.flavors[0] || 'Original';
+                const s = cake.sizes[0] || 'Standard';
+                const v = cake.variants?.find((v) => v.flavor === f && v.size === s);
                 addToCart({
                   cakeId: cake.id,
                   name: cake.name,
-                  flavor: cake.flavors[0] || 'Original',
-                  size: cake.sizes[0] || 'Standard',
-                  price: cake.price,
+                  flavor: f,
+                  size: s,
+                  price: v ? v.price : cake.price,
                   quantity: 1,
                   imageUrl: cake.imageUrl,
                 });

@@ -14,12 +14,23 @@ interface Cake {
   flavors: string[];
   sizes: string[];
   rating: number;
+  variants?: { flavor: string; size: string; price: number }[];
 }
 
 export default function ProductDetail({ cake }: { cake: Cake }) {
   const { addToCart } = useCart();
   const [selectedFlavor, setSelectedFlavor] = useState(cake.flavors[0] || '');
   const [selectedSize, setSelectedSize] = useState(cake.sizes[0] || '');
+
+  const activeVariant = cake.variants?.find(
+    (v) => v.flavor === selectedFlavor && v.size === selectedSize
+  );
+  const displayPrice = activeVariant ? activeVariant.price : cake.price;
+  
+  // Starting price (lowest variant, or base price)
+  const startingPrice = cake.variants && cake.variants.length > 0 
+    ? Math.min(...cake.variants.map((v) => v.price))
+    : cake.price;
 
   return (
     <section id="product-detail" className="py-20 lg:py-28 bg-[#fdf8f3]">
@@ -45,7 +56,7 @@ export default function ProductDetail({ cake }: { cake: Cake }) {
                 className="text-[#ffffff] font-bold text-2xl"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                ₱{cake.price.toFixed(0)}
+                ₱{startingPrice.toFixed(0)}
               </div>
             </div>
           </div>
@@ -145,7 +156,7 @@ export default function ProductDetail({ cake }: { cake: Cake }) {
                 className="text-[#2c2c2c] font-bold text-3xl"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                ₱{cake.price.toFixed(2)}
+                ₱{displayPrice.toFixed(2)}
               </span>
             </div>
 
@@ -157,7 +168,7 @@ export default function ProductDetail({ cake }: { cake: Cake }) {
                   name: cake.name,
                   flavor: selectedFlavor,
                   size: selectedSize,
-                  price: cake.price,
+                  price: displayPrice,
                   quantity: 1,
                   imageUrl: cake.imageUrl,
                 });

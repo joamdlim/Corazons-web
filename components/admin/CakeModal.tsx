@@ -12,6 +12,7 @@ interface CakeFormData {
   flavors: string;
   sizes: string;
   rating: string;
+  variants: { flavor: string; size: string; price: number }[];
 }
 
 interface CakeModalProps {
@@ -29,6 +30,7 @@ const defaultForm: CakeFormData = {
   flavors: '',
   sizes: '6 inch, 8 inch, 10 inch',
   rating: '4.5',
+  variants: [],
 };
 
 export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeModalProps) {
@@ -44,7 +46,20 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
       ? (initialData.sizes as unknown as string[]).join(', ')
       : (initialData?.sizes as string) || '6 inch, 8 inch, 10 inch',
     rating: initialData?.rating?.toString() || '4.5',
+    variants: (initialData?.variants as { flavor: string; size: string; price: number }[]) || [],
   });
+  
+  // Create a fast lookup for existing variants
+  const [variantPrices, setVariantPrices] = useState<Record<string, string>>(() => {
+    const map: Record<string, string> = {};
+    if (initialData?.variants && Array.isArray(initialData.variants)) {
+      initialData.variants.forEach((v) => {
+        map[`${v.flavor}-${v.size}`] = v.price.toString();
+      });
+    }
+    return map;
+  });
+  
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -64,10 +79,34 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
         : '/api/admin/cakes';
       const method = mode === 'edit' ? 'PATCH' : 'POST';
 
+      // Compute variants
+      const activeVariants: { flavor: string; size: string; price: number }[] = [];
+      const fList = form.flavors.split(',').map(f => f.trim()).filter(Boolean);
+      const sList = form.sizes.split(',').map(s => s.trim()).filter(Boolean);
+      
+      const basePrice = parseFloat(form.price);
+      
+      fList.forEach(flavor => {
+        sList.forEach(size => {
+          const key = `${flavor}-${size}`;
+          const overriddenPrice = variantPrices[key];
+          activeVariants.push({
+            flavor,
+            size,
+            price: overriddenPrice ? parseFloat(overriddenPrice) : basePrice
+          });
+        });
+      });
+
+      const payload = {
+        ...form,
+        variants: activeVariants,
+      };
+
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error('Failed to save cake');
       toast.success(mode === 'edit' ? 'Cake updated!' : 'Cake created!');
@@ -205,6 +244,42 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
               className="w-full px-3 py-2.5 bg-white/5 border border-white/15 rounded-xl text-white text-sm placeholder-white/30 focus:outline-none focus:border-[#6a8a5b]/60 min-h-[44px]"
             />
           </div>
+
+          {/* Dynamic Variant Prices Grid */}
+          {(form.flavors.trim() || form.sizes.trim()) && (
+            <div className="pt-2 border-t border-white/10">
+              <label className="block text-white/60 text-sm mb-3">
+                Variant Prices (Leave blank for base price)
+              </label>
+              <div className="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                {form.flavors.split(',').map(f => f.trim()).filter(Boolean).length === 0 
+                  ? <p className="text-xs text-white/30 italic">Please add flavors first.</p> 
+                  : form.sizes.split(',').map(s => s.trim()).filter(Boolean).length === 0
+                  ? <p className="text-xs text-white/30 italic">Please add sizes first.</p>
+                  : form.flavors.split(',').map(f => f.trim()).filter(Boolean).map(flavor => (
+                  <div key={flavor} className="space-y-2">
+                    <div className="text-xs font-semibold text-[#6a8a5b]">{flavor}</div>
+                    {form.sizes.split(',').map(s => s.trim()).filter(Boolean).map(size => {
+                      const key = `${flavor}-${size}`;
+                      return (
+                        <div key={key} className="flex items-center gap-3 pl-3">
+                          <span className="text-white/50 text-xs w-20 truncate">{size}</span>
+                          <input
+                            type="number"
+                            step="0.01"
+                            value={variantPrices[key] || ''}
+                            onChange={(e) => setVariantPrices(prev => ({ ...prev, [key]: e.target.value }))}
+                            placeholder={`Base: ₱${form.price || '0'}`}
+                            className="flex-1 px-3 py-1.5 bg-white/5 border border-white/15 rounded-lg text-white text-xs placeholder-white/20 focus:outline-none focus:border-[#6a8a5b]/60"
+                          />
+                        </div>
+                      )
+                    })}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Footer */}
           <div className="flex gap-3 justify-end pt-2">

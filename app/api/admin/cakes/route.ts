@@ -17,7 +17,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, description, price, imageUrl, flavors, sizes, rating } = body;
+    const { name, description, price, imageUrl, flavors, sizes, rating, variants } = body;
 
     if (!name || !description || price === undefined || !imageUrl) {
       return NextResponse.json(
@@ -39,6 +39,7 @@ export async function POST(req: Request) {
           ? sizes
           : (sizes || '').split(',').map((s: string) => s.trim()).filter(Boolean),
         rating: parseFloat(rating) || 0,
+        variants: variants || [],
         isVisible: true,
       },
     });
