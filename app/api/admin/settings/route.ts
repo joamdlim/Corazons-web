@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 
 export async function GET() {
@@ -64,6 +65,8 @@ export async function PATCH(req: Request) {
       });
     }
 
+    revalidatePath('/');
+    revalidatePath('/menu');
     return NextResponse.json(settings);
   } catch (error) {
     console.error('PATCH /api/admin/settings error:', error);

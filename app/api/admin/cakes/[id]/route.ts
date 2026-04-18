@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 
 export async function PATCH(
@@ -39,6 +40,8 @@ export async function PATCH(
     if (rating !== undefined) updateData.rating = parseFloat(rating);
 
     const cake = await prisma.cake.update({ where: { id }, data: updateData });
+    revalidatePath('/');
+    revalidatePath('/menu');
     return NextResponse.json(cake);
   } catch (error) {
     console.error('PATCH /api/admin/cakes/[id] error:', error);
@@ -53,6 +56,8 @@ export async function DELETE(
   try {
     const { id } = await params;
     await prisma.cake.delete({ where: { id } });
+    revalidatePath('/');
+    revalidatePath('/menu');
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('DELETE /api/admin/cakes/[id] error:', error);

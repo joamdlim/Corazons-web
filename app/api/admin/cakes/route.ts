@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 
 export async function GET() {
@@ -42,6 +43,8 @@ export async function POST(req: Request) {
       },
     });
 
+    revalidatePath('/');
+    revalidatePath('/menu');
     return NextResponse.json(cake, { status: 201 });
   } catch (error) {
     console.error('POST /api/admin/cakes error:', error);
