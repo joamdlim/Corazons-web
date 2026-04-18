@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { X, Loader2, Save } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 interface CakeFormData {
   name: string;
@@ -78,15 +79,23 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
     try {
       let finalImageUrl = form.imageUrl;
       if (imageFile) {
-        const formData = new FormData();
-        formData.append('file', imageFile);
-        const uploadRes = await fetch('/api/admin/upload', {
-          method: 'POST',
-          body: formData,
-        });
-        if (!uploadRes.ok) throw new Error('Upload failed');
-        const uploadData = await uploadRes.json();
-        finalImageUrl = uploadData.url;
+        const fileExt = imageFile.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+        const filePath = `cakes/${fileName}`;
+
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('cake-images')
+          .upload(filePath, imageFile);
+
+        if (uploadError) {
+          throw new Error('Supabase upload failed: ' + uploadError.message);
+        }
+
+        const { data: publicUrlData } = supabase.storage
+          .from('cake-images')
+          .getPublicUrl(filePath);
+
+        finalImageUrl = publicUrlData.publicUrl;
       }
 
       if (!finalImageUrl) {
