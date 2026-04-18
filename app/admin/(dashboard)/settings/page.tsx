@@ -11,7 +11,14 @@ interface SettingsForm {
   email: string;
   instagram: string;
   facebook: string;
+  heroHeadline: string;
+  heroSubtext: string;
+  menuHeadline: string;
+  menuSubtext: string;
+  aboutHeadline: string;
   aboutText: string;
+  contactHeadline: string;
+  contactSubtext: string;
 }
 
 const defaultForm: SettingsForm = {
@@ -21,7 +28,14 @@ const defaultForm: SettingsForm = {
   email: '',
   instagram: '',
   facebook: '',
+  heroHeadline: '',
+  heroSubtext: '',
+  menuHeadline: '',
+  menuSubtext: '',
+  aboutHeadline: '',
   aboutText: '',
+  contactHeadline: '',
+  contactSubtext: '',
 };
 
 export default function SettingsPage() {
@@ -40,7 +54,14 @@ export default function SettingsPage() {
           email: data.email || '',
           instagram: data.instagram || '',
           facebook: data.facebook || '',
+          heroHeadline: data.heroHeadline || '',
+          heroSubtext: data.heroSubtext || '',
+          menuHeadline: data.menuHeadline || '',
+          menuSubtext: data.menuSubtext || '',
+          aboutHeadline: data.aboutHeadline || '',
           aboutText: data.aboutText || '',
+          contactHeadline: data.contactHeadline || '',
+          contactSubtext: data.contactSubtext || '',
         });
       })
       .catch(() => toast.error('Failed to load settings'))
@@ -182,21 +203,133 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* About Text */}
+        {/* Home Section Text */}
         <div className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-6">
           <h2 className="text-white font-semibold mb-5 text-base" style={{ fontFamily: 'Playfair Display, serif' }}>
-            About Text
+            Home Section Text
           </h2>
-          <textarea
-            id="settings-about"
-            name="aboutText"
-            value={form.aboutText}
-            onChange={handleChange}
-            rows={5}
-            placeholder="Tell your brand story..."
-            className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 resize-none"
-          />
-          <p className="text-white/30 text-xs mt-2">Displayed in the footer and about section.</p>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="settings-hero-headline" className="block text-white/60 text-sm mb-1.5">Hero Headline</label>
+              <input
+                id="settings-hero-headline"
+                name="heroHeadline"
+                value={form.heroHeadline}
+                onChange={handleChange}
+                placeholder="Delight in Every Bite ✦"
+                className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 min-h-[44px]"
+              />
+            </div>
+            <div>
+              <label htmlFor="settings-hero-subtext" className="block text-white/60 text-sm mb-1.5">Hero Subtext</label>
+              <textarea
+                id="settings-hero-subtext"
+                name="heroSubtext"
+                value={form.heroSubtext}
+                onChange={handleChange}
+                rows={3}
+                placeholder="Custom artisan cakes crafted with passion..."
+                className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 resize-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Menu Section Text */}
+        <div className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-6">
+          <h2 className="text-white font-semibold mb-5 text-base" style={{ fontFamily: 'Playfair Display, serif' }}>
+            Menu Section Text
+          </h2>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="settings-menu-headline" className="block text-white/60 text-sm mb-1.5">Menu Headline</label>
+              <input
+                id="settings-menu-headline"
+                name="menuHeadline"
+                value={form.menuHeadline}
+                onChange={handleChange}
+                placeholder="Full Cake Menu"
+                className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 min-h-[44px]"
+              />
+            </div>
+            <div>
+              <label htmlFor="settings-menu-subtext" className="block text-white/60 text-sm mb-1.5">Menu Subtext</label>
+              <textarea
+                id="settings-menu-subtext"
+                name="menuSubtext"
+                value={form.menuSubtext}
+                onChange={handleChange}
+                rows={3}
+                placeholder="Every cake is handcrafted and made to order..."
+                className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 resize-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* About Section Text */}
+        <div className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-6">
+          <h2 className="text-white font-semibold mb-5 text-base" style={{ fontFamily: 'Playfair Display, serif' }}>
+            About Section Text
+          </h2>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="settings-about-headline" className="block text-white/60 text-sm mb-1.5">About Headline</label>
+              <input
+                id="settings-about-headline"
+                name="aboutHeadline"
+                value={form.aboutHeadline}
+                onChange={handleChange}
+                placeholder="Baked with Love"
+                className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 min-h-[44px]"
+              />
+            </div>
+            <div>
+              <label htmlFor="settings-about-text" className="block text-white/60 text-sm mb-1.5">About Text</label>
+              <textarea
+                id="settings-about-text"
+                name="aboutText"
+                value={form.aboutText}
+                onChange={handleChange}
+                rows={6}
+                placeholder="Tell your brand story..."
+                className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 resize-none"
+              />
+              <p className="text-white/30 text-xs mt-2">Displayed in the footer and about section.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Section Text */}
+        <div className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-6">
+          <h2 className="text-white font-semibold mb-5 text-base" style={{ fontFamily: 'Playfair Display, serif' }}>
+            Contact Section Text
+          </h2>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="settings-contact-headline" className="block text-white/60 text-sm mb-1.5">Contact Headline</label>
+              <input
+                id="settings-contact-headline"
+                name="contactHeadline"
+                value={form.contactHeadline}
+                onChange={handleChange}
+                placeholder="Get in Touch"
+                className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 min-h-[44px]"
+              />
+            </div>
+            <div>
+              <label htmlFor="settings-contact-subtext" className="block text-white/60 text-sm mb-1.5">Contact Subtext</label>
+              <textarea
+                id="settings-contact-subtext"
+                name="contactSubtext"
+                value={form.contactSubtext}
+                onChange={handleChange}
+                rows={3}
+                placeholder="Have questions about a custom order?..."
+                className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 resize-none"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Save */}

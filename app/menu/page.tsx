@@ -31,8 +31,21 @@ async function getAllCakes(): Promise<CakeData[]> {
   }
 }
 
+async function getSettings() {
+  try {
+    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/admin/settings`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
+}
+
 export default async function MenuPage() {
-  const cakes = await getAllCakes();
+  const [cakes, settings] = await Promise.all([getAllCakes(), getSettings()]);
 
   return (
     <>
@@ -52,11 +65,10 @@ export default async function MenuPage() {
                 fontSize: 'clamp(2.5rem, 5vw, 4rem)',
               }}
             >
-              Full Cake Menu
+              {settings?.menuHeadline || 'Full Cake Menu'}
             </h1>
-            <p className="text-white/50 max-w-xl mx-auto text-base">
-              Every cake is handcrafted and made to order. Browse all our flavors and
-              designs — or let us create something custom just for you.
+            <p className="text-white/50 max-w-xl mx-auto text-base whitespace-pre-wrap">
+              {settings?.menuSubtext || 'Every cake is handcrafted and made to order. Browse all our flavors and designs — or let us create something custom just for you.'}
             </p>
           </div>
         </div>

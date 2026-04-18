@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { ChevronDown } from 'lucide-react';
 
-export default function HeroSection() {
+export default function HeroSection({ settings }: { settings?: any }) {
   return (
     <section
       id="hero"
@@ -35,20 +35,16 @@ export default function HeroSection() {
                 fontWeight: 700,
               }}
             >
-              Delight in{' '}
-              <span className="text-[#6a8a5b] italic">Every</span>
-              <br />
-              Bite ✦
+              <span dangerouslySetInnerHTML={{ __html: (settings?.heroHeadline || "Delight in <span class='text-[#6a8a5b] italic'>Every</span><br/>Bite ✦").replace(/✦/g, '') }} />
+              {(!settings?.heroHeadline || settings.heroHeadline.includes('✦')) && ' ✦'}
             </h1>
 
             {/* Subtext */}
             <p
-              className="text-white/60 mb-10 max-w-lg mx-auto lg:mx-0"
+              className="text-white/60 mb-10 max-w-lg mx-auto lg:mx-0 whitespace-pre-wrap"
               style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', lineHeight: '1.8' }}
             >
-              Custom artisan cakes crafted with passion, premium ingredients,
-              and a whole lot of love. From birthdays to weddings — every
-              occasion deserves a masterpiece.
+              {settings?.heroSubtext || "Custom artisan cakes crafted with passion, premium ingredients, and a whole lot of love. From birthdays to weddings — every occasion deserves a masterpiece."}
             </p>
 
             {/* CTA Buttons */}

@@ -14,7 +14,11 @@ export async function GET() {
 export async function PATCH(req: Request) {
   try {
     const body = await req.json();
-    const { businessName, address, phone, email, instagram, facebook, aboutText } = body;
+    const {
+      businessName, address, phone, email, instagram, facebook, aboutText,
+      heroHeadline, heroSubtext, menuHeadline, menuSubtext, aboutHeadline,
+      contactHeadline, contactSubtext
+    } = body;
 
     const existing = await prisma.settings.findFirst();
 
@@ -30,6 +34,13 @@ export async function PATCH(req: Request) {
           ...(instagram !== undefined && { instagram }),
           ...(facebook !== undefined && { facebook }),
           ...(aboutText !== undefined && { aboutText }),
+          ...(heroHeadline !== undefined && { heroHeadline }),
+          ...(heroSubtext !== undefined && { heroSubtext }),
+          ...(menuHeadline !== undefined && { menuHeadline }),
+          ...(menuSubtext !== undefined && { menuSubtext }),
+          ...(aboutHeadline !== undefined && { aboutHeadline }),
+          ...(contactHeadline !== undefined && { contactHeadline }),
+          ...(contactSubtext !== undefined && { contactSubtext }),
         },
       });
     } else {
@@ -42,6 +53,13 @@ export async function PATCH(req: Request) {
           instagram: instagram || '',
           facebook: facebook || '',
           aboutText: aboutText || '',
+          heroHeadline: heroHeadline || '',
+          heroSubtext: heroSubtext || '',
+          menuHeadline: menuHeadline || '',
+          menuSubtext: menuSubtext || '',
+          aboutHeadline: aboutHeadline || '',
+          contactHeadline: contactHeadline || '',
+          contactSubtext: contactSubtext || '',
         },
       });
     }

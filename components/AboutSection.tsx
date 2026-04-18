@@ -19,7 +19,7 @@ const features = [
   },
 ];
 
-export default function AboutSection() {
+export default function AboutSection({ settings }: { settings?: any }) {
   return (
     <section id="about" className="py-20 lg:py-28 bg-[#fdf8f3]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,18 +38,10 @@ export default function AboutSection() {
                   lineHeight: '1.2',
                 }}
               >
-                Baked with{' '}
-                <span className="italic text-[#6a8a5b]">Love</span>
+                {settings?.aboutHeadline || 'Baked with Love'}
               </h2>
-              <p className="text-[#888780] leading-loose text-base mb-4">
-                Corazón Cakes began as a weekend passion project in a tiny kitchen, driven by one simple
-                belief: that cake is more than dessert — it&apos;s the centerpiece of life&apos;s most beautiful
-                moments.
-              </p>
-              <p className="text-[#888780] leading-loose text-base">
-                Today, we craft hundreds of custom cakes each month, each one as unique as the story it
-                celebrates. Whether it&apos;s a child&apos;s first birthday or an intimate anniversary dinner,
-                we pour the same passion into every tier, every flower, every slice.
+              <p className="text-[#888780] leading-loose text-base whitespace-pre-wrap">
+                {settings?.aboutText || "Corazón Cakes began as a weekend passion project in a tiny kitchen, driven by one simple belief: that cake is more than dessert — it's the centerpiece of life's most beautiful moments.\n\nToday, we craft hundreds of custom cakes each month, each one as unique as the story it celebrates. Whether it's a child's first birthday or an intimate anniversary dinner, we pour the same passion into every tier, every flower, every slice."}
               </p>
             </div>
 

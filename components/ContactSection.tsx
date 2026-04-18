@@ -23,7 +23,7 @@ const contactInfo = [
   },
 ];
 
-export default function ContactSection() {
+export default function ContactSection({ settings }: { settings?: any }) {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [loading, setLoading] = useState(false);
 
@@ -69,10 +69,10 @@ export default function ContactSection() {
               fontSize: 'clamp(2rem, 4vw, 3rem)',
             }}
           >
-            Get in Touch
+            {settings?.contactHeadline || 'Get in Touch'}
           </h2>
-          <p className="text-white/50 max-w-xl mx-auto text-base">
-            Have questions about a custom order? We&apos;d love to hear from you.
+          <p className="text-white/50 max-w-xl mx-auto text-base whitespace-pre-wrap">
+            {settings?.contactSubtext || "Have questions about a custom order? We'd love to hear from you."}
           </p>
           <div className="mt-6 flex gap-2 justify-center">
             <span className="w-12 h-0.5 bg-[#6a8a5b] rounded-full" />

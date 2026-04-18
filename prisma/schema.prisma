@@ -83,4 +83,12 @@ model Settings {
   instagram    String @default("")
   facebook     String @default("")
   aboutText    String @default("")
+  
+  heroHeadline    String @default("")
+  heroSubtext     String @default("")
+  menuHeadline    String @default("")
+  menuSubtext     String @default("")
+  aboutHeadline   String @default("")
+  contactHeadline String @default("")
+  contactSubtext  String @default("")
 }
