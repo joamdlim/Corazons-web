@@ -132,8 +132,8 @@ export default function CakeModal({ mode, initialData, onClose, onSaved }: CakeM
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-white/60 text-sm mb-1.5">
-                Price ($) <span className="text-[#6a8a5b]">*</span>
+              <label htmlFor="price" className="block text-white/60 text-sm mb-1.5 font-medium">
+                Price (₱) <span className="text-[#6a8a5b]">*</span>
               </label>
               <input
                 name="price"

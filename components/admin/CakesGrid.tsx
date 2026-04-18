@@ -104,7 +104,7 @@ export default function CakesGrid({ cakes, onRefresh }: CakesGridProps) {
                 <h4 className="text-white font-semibold text-base" style={{ fontFamily: 'Playfair Display, serif' }}>
                   {cake.name}
                 </h4>
-                <span className="text-[#6a8a5b] font-bold text-base">${cake.price}</span>
+                <span className="text-[#6a8a5b] font-bold text-base">₱{cake.price}</span>
               </div>
               <p className="text-white/40 text-xs line-clamp-2 mb-3">{cake.description}</p>
               <div className="flex items-center gap-2 mb-4">

@@ -45,7 +45,7 @@ export default function ProductDetail({ cake }: { cake: Cake }) {
                 className="text-[#ffffff] font-bold text-2xl"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                ${cake.price.toFixed(0)}
+                ₱{cake.price.toFixed(0)}
               </div>
             </div>
           </div>
@@ -145,7 +145,7 @@ export default function ProductDetail({ cake }: { cake: Cake }) {
                 className="text-[#2c2c2c] font-bold text-3xl"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                ${cake.price.toFixed(2)}
+                ₱{cake.price.toFixed(2)}
               </span>
             </div>
 

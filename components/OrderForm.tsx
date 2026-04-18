@@ -93,7 +93,7 @@ export default function OrderForm() {
                 <div className="flex-1 min-w-0">
                   <h4 className="text-sm font-semibold text-[#2c2c2c] truncate">{item.name}</h4>
                   <p className="text-xs text-[#888780] truncate">{item.size} • {item.flavor}</p>
-                  <p className="text-xs font-medium text-[#6a8a5b] mt-1">${item.price.toFixed(2)} ea</p>
+                  <p className="text-xs font-medium text-[#6a8a5b] mt-1">₱{item.price.toFixed(2)} ea</p>
                 </div>
                 
                 <div className="flex items-center gap-3">
@@ -111,7 +111,7 @@ export default function OrderForm() {
             
             <div className="pt-4 flex justify-between items-center border-t border-gray-100">
               <span className="text-[#2c2c2c] font-semibold text-sm">Total</span>
-              <span className="text-[#6a8a5b] font-bold text-lg">${totalPrice.toFixed(2)}</span>
+              <span className="text-[#6a8a5b] font-bold text-lg">₱{totalPrice.toFixed(2)}</span>
             </div>
           </div>
         )}

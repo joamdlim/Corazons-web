@@ -40,7 +40,7 @@ export default function CakeCard({ cake }: CakeCardProps) {
 
         {/* Price pill on hover */}
         <div className="absolute top-3 right-3 bg-[#6a8a5b] text-[#ffffff] px-3 py-1 rounded-full text-sm font-bold shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
-          ${cake.price.toFixed(0)}
+          ₱{cake.price.toFixed(0)}
         </div>
       </div>
 
@@ -79,7 +79,7 @@ export default function CakeCard({ cake }: CakeCardProps) {
               className="text-[#2c2c2c] font-bold text-lg"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              ${cake.price.toFixed(0)}
+              ₱{cake.price.toFixed(0)}
             </span>
           </div>
           <div className="flex gap-2">

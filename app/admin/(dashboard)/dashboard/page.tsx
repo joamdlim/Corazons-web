@@ -92,7 +92,7 @@ export default async function DashboardPage() {
         />
         <StatCard
           title="Total Revenue"
-          value={`$${totalRevenue.toFixed(0)}`}
+          value={`₱${totalRevenue.toFixed(0)}`}
           icon={DollarSign}
           color="text-[#a8c5a0]"
           description="From completed orders"
