@@ -8,8 +8,8 @@ const contactInfo = [
   {
     icon: Phone,
     label: 'Call Us',
-    value: '+1 (555) 123-4567',
-    href: 'tel:+15551234567',
+    value: '+63 942 446 8493',
+    href: 'tel:+639424468493',
     color: 'bg-[#6a8a5b]/15',
     iconColor: 'text-[#6a8a5b]',
   },
@@ -113,33 +113,39 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <p className="text-white font-semibold text-sm">Our Location</p>
-                    <p className="text-white/50 text-xs">123 Sweet Lane, Bakery District, CA 90210</p>
+                    <p className="text-white/50 text-xs">171 Nazareth, Lanang, Davao City</p>
                   </div>
                 </div>
               </div>
-              {/* Map placeholder */}
-              <div className="relative h-48 bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#6a8a5b]/20 flex items-center justify-center mx-auto mb-3">
-                    <MapPin className="w-6 h-6 text-[#6a8a5b] fill-[#6a8a5b]/30" />
-                  </div>
-                  <p className="text-white/40 text-sm">123 Sweet Lane</p>
-                  <p className="text-white/40 text-xs mt-1">Bakery District, CA 90210</p>
-                  <a
-                    href="https://maps.google.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    id="get-directions-btn"
-                    className="inline-block mt-3 text-[#6a8a5b] text-xs hover:underline"
-                  >
-                    Get Directions →
-                  </a>
-                </div>
+              {/* Live Google Maps embed */}
+              <div className="relative h-56">
+                <iframe
+                  src="https://maps.google.com/maps?q=7.1095941,125.6317483&hl=en&z=17&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Corazón Cakes Location"
+                  className="w-full h-full"
+                />
               </div>
-              <div className="p-4 flex gap-4 text-xs text-white/40">
-                <span>Mon–Fri: 8am–7pm</span>
-                <span>·</span>
-                <span>Sat–Sun: 9am–5pm</span>
+              <div className="p-4 flex items-center justify-between">
+                <div className="flex gap-4 text-xs text-white/40">
+                  <span>Mon–Sat: 8am–7pm</span>
+                  <span>·</span>
+                  <span>Sun: 9am–5pm</span>
+                </div>
+                <a
+                  href="https://maps.app.goo.gl/oZz4dhxd6fzy2Vmp8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id="get-directions-btn"
+                  className="text-[#6a8a5b] text-xs hover:underline shrink-0"
+                >
+                  Get Directions →
+                </a>
               </div>
             </div>
           </div>
