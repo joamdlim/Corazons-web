@@ -92,25 +92,7 @@ export default async function MenuPage() {
               </>
             )}
 
-            {/* CTA */}
-            <div className="text-center mt-16 p-10 bg-white rounded-3xl border border-[#6a8a5b]/15 shadow-sm">
-              <h3
-                className="text-[#2c2c2c] text-2xl mb-3"
-                style={{ fontFamily: 'Playfair Display, serif' }}
-              >
-                Don&apos;t see what you&apos;re looking for?
-              </h3>
-              <p className="text-[#888780] mb-6 max-w-md mx-auto">
-                We specialize in fully custom cakes. Send us your vision and we&apos;ll make it happen.
-              </p>
-              <a
-                href="/#order"
-                id="menu-custom-order-btn"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#6a8a5b] text-[#ffffff] rounded-full font-semibold hover:bg-[#58764a] transition-all duration-300 hover:shadow-lg min-h-[44px]"
-              >
-                Request Custom Cake →
-              </a>
-            </div>
+
           </div>
         </section>
       </main>

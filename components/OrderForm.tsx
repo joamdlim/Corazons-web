@@ -7,7 +7,7 @@ import { useCart } from '@/components/CartContext';
 
 export default function OrderForm() {
   const { items, removeFromCart, updateQuantity, clearCart, totalPrice } = useCart();
-  
+
   const [formData, setFormData] = useState({
     customerName: '',
     email: '',
@@ -26,7 +26,7 @@ export default function OrderForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (items.length === 0) {
       toast.error('Your cart is empty! Please add some cakes first.');
       return;
@@ -38,7 +38,7 @@ export default function OrderForm() {
     }
 
     setLoading(true);
-    
+
     // Serialize Cart into cakeName
     const formattedCakeName = items
       .map((i) => `${i.quantity}x ${i.name} (${i.size}, ${i.flavor})`)
@@ -83,7 +83,7 @@ export default function OrderForm() {
         <h3 className="text-[#2c2c2c] font-bold text-lg mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
           Your Cart
         </h3>
-        
+
         {items.length === 0 ? (
           <p className="text-sm text-[#888780] py-4 text-center">Your cart is currently empty.</p>
         ) : (
@@ -95,7 +95,7 @@ export default function OrderForm() {
                   <p className="text-xs text-[#888780] truncate">{item.size} • {item.flavor}</p>
                   <p className="text-xs font-medium text-[#6a8a5b] mt-1">₱{item.price.toFixed(2)} ea</p>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <div className="flex items-center bg-gray-50 rounded-full border border-gray-100">
                     <button type="button" onClick={() => updateQuantity(item.cartId, item.quantity - 1)} className="p-1.5 text-gray-400 hover:text-[#6a8a5b]"><Minus className="w-3.5 h-3.5" /></button>
@@ -108,7 +108,7 @@ export default function OrderForm() {
                 </div>
               </div>
             ))}
-            
+
             <div className="pt-4 flex justify-between items-center border-t border-gray-100">
               <span className="text-[#2c2c2c] font-semibold text-sm">Total</span>
               <span className="text-[#6a8a5b] font-bold text-lg">₱{totalPrice.toFixed(2)}</span>
@@ -162,7 +162,7 @@ export default function OrderForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="+1 (555) 000-0000"
+            placeholder="+639171234567"
             className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-[#2c2c2c] placeholder-[#888780] focus:outline-none focus:border-[#6a8a5b] focus:ring-2 focus:ring-[#6a8a5b]/20 transition-all text-sm min-h-[44px]"
           />
         </div>
@@ -181,22 +181,6 @@ export default function OrderForm() {
             className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-[#2c2c2c] placeholder-[#888780] focus:outline-none focus:border-[#6a8a5b] focus:ring-2 focus:ring-[#6a8a5b]/20 transition-all text-sm min-h-[44px]"
           />
         </div>
-      </div>
-
-      {/* Custom Message */}
-      <div>
-        <label htmlFor="order-message" className="block text-[#2c2c2c] text-sm font-semibold mb-2">
-          Custom Plaque Message (Optional)
-        </label>
-        <input
-          id="order-message"
-          type="text"
-          name="customMessage"
-          value={formData.customMessage}
-          onChange={handleChange}
-          placeholder="Happy Birthday, Sarah! 🎂"
-          className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-[#2c2c2c] placeholder-[#888780] focus:outline-none focus:border-[#6a8a5b] focus:ring-2 focus:ring-[#6a8a5b]/20 transition-all text-sm min-h-[44px]"
-        />
       </div>
 
       {/* Special Notes */}
