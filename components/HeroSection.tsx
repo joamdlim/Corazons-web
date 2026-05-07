@@ -50,7 +50,7 @@ export default function HeroSection({ settings }: { settings?: any }) {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a
-                href="/menu"
+                href="/#collection"
                 id="hero-order-btn"
                 className="px-8 py-4 bg-[#6a8a5b] text-[#ffffff] rounded-full font-semibold text-base hover:bg-[#58764a] transition-all duration-300 hover:shadow-xl hover:shadow-pink-400/30 hover:-translate-y-0.5 min-h-[44px] flex items-center justify-center"
               >

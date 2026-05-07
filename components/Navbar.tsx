@@ -8,8 +8,8 @@ import { useCart } from '@/components/CartContext';
 
 const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'Menu', href: '/menu' },
-  { label: 'Order', href: '/menu' },
+  { label: 'Menu', href: '/#collection' },
+  { label: 'Order', href: '/#order' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ];
@@ -63,7 +63,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="/menu"
+              href="/#order"
               id="nav-order-btn"
               className="gap-2 px-5 py-2.5 bg-[#6a8a5b] text-[#ffffff] rounded-full text-sm font-semibold hover:bg-[#58764a] transition-all duration-200 hover:shadow-lg hover:shadow-pink-300/30 min-h-[44px] min-w-[44px] flex items-center"
             >
@@ -102,7 +102,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="/menu"
+            href="/#order"
             onClick={() => setIsOpen(false)}
             className="mt-2 px-5 py-3 bg-[#6a8a5b] text-[#ffffff] rounded-full text-base font-semibold text-center hover:bg-[#58764a] transition-colors min-h-[44px] flex items-center justify-center"
           >
