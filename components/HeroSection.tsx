@@ -94,7 +94,7 @@ export default function HeroSection({ settings }: { settings?: any }) {
             {/* Main Image */}
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-full overflow-hidden border-4 border-[#6a8a5b]/30 shadow-2xl shadow-pink-400/20">
               <Image
-                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=800&fit=crop"
+                src={settings?.heroImage || "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=800&fit=crop"}
                 alt="Artisan celebration cake — dark chocolate ganache with roses"
                 fill
                 className="object-cover"

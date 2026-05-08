@@ -128,11 +128,7 @@ function LoginForm() {
             </button>
           </form>
 
-          <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
-            <p className="text-white/30 text-xs text-center">
-              Default credentials: admin@cakeshop.com / admin123
-            </p>
-          </div>
+
         </div>
 
         <p className="text-center mt-6">

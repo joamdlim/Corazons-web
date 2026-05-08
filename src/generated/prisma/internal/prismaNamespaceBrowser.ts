@@ -152,6 +152,8 @@ export const SettingsScalarFieldEnum = {
   instagram: 'instagram',
   facebook: 'facebook',
   aboutText: 'aboutText',
+  aboutImage: 'aboutImage',
+  heroImage: 'heroImage',
   heroHeadline: 'heroHeadline',
   heroSubtext: 'heroSubtext',
   menuHeadline: 'menuHeadline',

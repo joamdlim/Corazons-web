@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Save, Loader2, Settings } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 interface SettingsForm {
   businessName: string;
@@ -19,6 +20,8 @@ interface SettingsForm {
   aboutText: string;
   contactHeadline: string;
   contactSubtext: string;
+  aboutImage: string;
+  heroImage: string;
 }
 
 const defaultForm: SettingsForm = {
@@ -36,12 +39,19 @@ const defaultForm: SettingsForm = {
   aboutText: '',
   contactHeadline: '',
   contactSubtext: '',
+  aboutImage: '',
+  heroImage: '',
 };
 
 export default function SettingsPage() {
   const [form, setForm] = useState<SettingsForm>(defaultForm);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+
+  const [aboutImageFile, setAboutImageFile] = useState<File | null>(null);
+  const [heroImageFile, setHeroImageFile] = useState<File | null>(null);
+  const [aboutImagePreview, setAboutImagePreview] = useState<string | null>(null);
+  const [heroImagePreview, setHeroImagePreview] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/admin/settings')
@@ -62,7 +72,11 @@ export default function SettingsPage() {
           aboutText: data.aboutText || '',
           contactHeadline: data.contactHeadline || '',
           contactSubtext: data.contactSubtext || '',
+          aboutImage: data.aboutImage || '',
+          heroImage: data.heroImage || '',
         });
+        setAboutImagePreview(data.aboutImage || null);
+        setHeroImagePreview(data.heroImage || null);
       })
       .catch(() => toast.error('Failed to load settings'))
       .finally(() => setLoading(false));
@@ -76,12 +90,51 @@ export default function SettingsPage() {
     e.preventDefault();
     setSaving(true);
     try {
+      let finalAboutImage = form.aboutImage;
+      let finalHeroImage = form.heroImage;
+
+      // Upload about image if changed
+      if (aboutImageFile) {
+        const fileExt = aboutImageFile.name.split('.').pop();
+        const fileName = `settings-about-${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+        const { error: uploadError } = await supabase.storage
+          .from('cake-images')
+          .upload(`cakes/${fileName}`, aboutImageFile);
+
+        if (uploadError) throw new Error('Failed to upload about image');
+        const { data: publicUrlData } = supabase.storage.from('cake-images').getPublicUrl(`cakes/${fileName}`);
+        finalAboutImage = publicUrlData.publicUrl;
+      }
+
+      // Upload hero image if changed
+      if (heroImageFile) {
+        const fileExt = heroImageFile.name.split('.').pop();
+        const fileName = `settings-hero-${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+        const { error: uploadError } = await supabase.storage
+          .from('cake-images')
+          .upload(`cakes/${fileName}`, heroImageFile);
+
+        if (uploadError) throw new Error('Failed to upload hero image');
+        const { data: publicUrlData } = supabase.storage.from('cake-images').getPublicUrl(`cakes/${fileName}`);
+        finalHeroImage = publicUrlData.publicUrl;
+      }
+
+      const payload = {
+        ...form,
+        aboutImage: finalAboutImage,
+        heroImage: finalHeroImage,
+      };
+
       const res = await fetch('/api/admin/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error('Failed to save');
+      
+      setForm(prev => ({ ...prev, aboutImage: finalAboutImage, heroImage: finalHeroImage }));
+      setAboutImageFile(null);
+      setHeroImageFile(null);
       toast.success('Settings saved successfully!');
     } catch {
       toast.error('Failed to save settings');
@@ -232,6 +285,29 @@ export default function SettingsPage() {
                 className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 resize-none"
               />
             </div>
+            <div>
+              <label className="block text-white/60 text-sm mb-1.5">Hero Image</label>
+              <div className="flex items-center gap-4">
+                {heroImagePreview && (
+                  <div className="w-16 h-16 rounded-xl overflow-hidden bg-white/5 shrink-0 border border-white/15">
+                    <img src={heroImagePreview} alt="Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setHeroImageFile(file);
+                      setHeroImagePreview(URL.createObjectURL(file));
+                    }
+                  }}
+                  className="w-full px-3 py-2 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#6a8a5b] file:text-white hover:file:bg-[#58764a] transition-all cursor-pointer"
+                />
+              </div>
+              <p className="text-white/30 text-xs mt-1.5">Upload a new image for the hero section.</p>
+            </div>
           </div>
         </div>
 
@@ -296,6 +372,29 @@ export default function SettingsPage() {
                 className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 resize-none"
               />
               <p className="text-white/30 text-xs mt-2">Displayed in the footer and about section.</p>
+            </div>
+            <div>
+              <label className="block text-white/60 text-sm mb-1.5">About Image</label>
+              <div className="flex items-center gap-4">
+                {aboutImagePreview && (
+                  <div className="w-16 h-16 rounded-xl overflow-hidden bg-white/5 shrink-0 border border-white/15">
+                    <img src={aboutImagePreview} alt="Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setAboutImageFile(file);
+                      setAboutImagePreview(URL.createObjectURL(file));
+                    }
+                  }}
+                  className="w-full px-3 py-2 bg-white/5 border border-white/15 rounded-xl text-white text-sm focus:outline-none focus:border-[#6a8a5b]/60 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#6a8a5b] file:text-white hover:file:bg-[#58764a] transition-all cursor-pointer"
+                />
+              </div>
+              <p className="text-white/30 text-xs mt-1.5">Upload a new image for the about section.</p>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ export async function PATCH(req: Request) {
     const {
       businessName, address, phone, email, instagram, facebook, aboutText,
       heroHeadline, heroSubtext, menuHeadline, menuSubtext, aboutHeadline,
-      contactHeadline, contactSubtext
+      contactHeadline, contactSubtext, aboutImage, heroImage
     } = body;
 
     const existing = await prisma.settings.findFirst();
@@ -42,6 +42,8 @@ export async function PATCH(req: Request) {
           ...(aboutHeadline !== undefined && { aboutHeadline }),
           ...(contactHeadline !== undefined && { contactHeadline }),
           ...(contactSubtext !== undefined && { contactSubtext }),
+          ...(aboutImage !== undefined && { aboutImage }),
+          ...(heroImage !== undefined && { heroImage }),
         },
       });
     } else {
@@ -61,6 +63,8 @@ export async function PATCH(req: Request) {
           aboutHeadline: aboutHeadline || '',
           contactHeadline: contactHeadline || '',
           contactSubtext: contactSubtext || '',
+          aboutImage: aboutImage || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=1000&fit=crop',
+          heroImage: heroImage || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&h=800&fit=crop',
         },
       });
     }

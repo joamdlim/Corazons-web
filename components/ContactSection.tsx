@@ -2,26 +2,7 @@
 
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Phone, Mail, MapPin, Loader2, Send } from 'lucide-react';
-
-const contactInfo = [
-  {
-    icon: Phone,
-    label: 'Call Us',
-    value: '+63 942 446 8493',
-    href: 'tel:+639424468493',
-    color: 'bg-[#6a8a5b]/15',
-    iconColor: 'text-[#6a8a5b]',
-  },
-  {
-    icon: Mail,
-    label: 'Email Us',
-    value: 'hello@corazoncakes.com',
-    href: 'mailto:hello@corazoncakes.com',
-    color: 'bg-[#a8c5a0]/15',
-    iconColor: 'text-[#a8c5a0]',
-  },
-];
+import { MapPin, Loader2, Send } from 'lucide-react';
 
 export default function ContactSection({ settings }: { settings?: any }) {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -83,27 +64,6 @@ export default function ContactSection({ settings }: { settings?: any }) {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left: Contact Info + Map */}
           <div className="flex flex-col gap-6">
-            {/* Contact Cards */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              {contactInfo.map(({ icon: Icon, label, value, href, color, iconColor }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="group flex flex-col gap-3 p-6 bg-white/5 hover:bg-white/8 border border-white/10 hover:border-[#6a8a5b]/30 rounded-2xl transition-all duration-300 min-h-[44px]"
-                >
-                  <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center`}>
-                    <Icon className={`w-5 h-5 ${iconColor}`} />
-                  </div>
-                  <div>
-                    <p className="text-white/50 text-xs font-medium tracking-wide mb-1">{label}</p>
-                    <p className="text-white font-semibold text-sm group-hover:text-[#6a8a5b] transition-colors">
-                      {value}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
-
             {/* Map / Location Card */}
             <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
               <div className="p-6 border-b border-white/10">
@@ -131,12 +91,7 @@ export default function ContactSection({ settings }: { settings?: any }) {
                   className="w-full h-full"
                 />
               </div>
-              <div className="p-4 flex items-center justify-between">
-                <div className="flex gap-4 text-xs text-white/40">
-                  <span>Mon–Sat: 8am–7pm</span>
-                  <span>·</span>
-                  <span>Sun: 9am–5pm</span>
-                </div>
+              <div className="p-4 flex items-center justify-end">
                 <a
                   href="https://maps.app.goo.gl/oZz4dhxd6fzy2Vmp8"
                   target="_blank"
